@@ -13,10 +13,10 @@ export class WeightEntriesService {
   public getEntries() {
     return this.http.get<Entry[]>('/api/entries').pipe(
       map(entries => { // map operator from rxjs - allows us to manipulate the values as they pass through the stream
-        return entries.map(e => {
+        return entries.map(e => { // array map
           e.date = new Date(e.date);
           return e;
-        }) // array map
+        })
       }),
       map(entries => {
         return entries.sort((a: Entry, b: Entry) => {
