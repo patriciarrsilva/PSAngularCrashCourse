@@ -14,16 +14,22 @@ export class HomeComponent implements OnInit {
   constructor(public entriesSvc: WeightEntriesService) { }
 
   ngOnInit() {
-    this.entriesSvc.getEntries().subscribe(entries => {
-      this.entries = entries;
-    })
+    this.updateData();
   }
 
   toggleBodyFat() {
     this.showBodyFat = !this.showBodyFat;
   }
 
+  updateData() {
+    this.entriesSvc.getEntries().subscribe(entries => {
+      this.entries = entries;
+    })
+  }
+
   createNewEntry(entry: Entry) {
-    this.entriesSvc.addEntry(entry);
+    this.entriesSvc.addEntry(entry).subscribe(() => {
+      this.updateData();
+    });
   }
 }

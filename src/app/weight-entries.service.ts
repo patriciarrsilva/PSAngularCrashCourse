@@ -33,6 +33,6 @@ export class WeightEntriesService {
   }
 
   addEntry(entry: Entry) {
-
+    return this.http.post('/api/entries', entry)
   }
 }
